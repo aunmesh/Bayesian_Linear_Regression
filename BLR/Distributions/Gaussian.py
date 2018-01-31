@@ -33,3 +33,7 @@ class MultGaussian(Distribution):
         mult = -0.5 *  np.matmul(temp,np.transpose(diff))
          
         return  ( 1.0 / self.det_cov ) * np.exp(mult)
+
+    #Returns N samples generated from this Distribution
+    def Generate(self,N):
+        pass
