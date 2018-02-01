@@ -36,5 +36,5 @@ class MultGaussian(Distribution):
 
     #Returns N samples generated from this Distribution
     def Generate(self,N):
-	return np.random.normal(mu, sigma, 1000)
+	return np.random.multivariate_normal(self.Params[0], self.Params[1], 1000)
 
