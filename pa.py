@@ -36,18 +36,28 @@ for d_size in sizes:
     
     Model = BLR(X,Y ,np.ones(2) , Lambda, Beta)
     Model.InferPosterior()
-    
+
+    print("Mean of Posterior is")
+    print (Model.Posterior.Params)[0]
+
+    print("Variance of Posterior is")
+    print (Model.Posterior.Params)[1]
+ 
     N = 10000
     Vals = Model.Posterior.Generate(N)  
 
     # Fixing random state for reproducibility
-
     plt.figure(temp + 10)
+
+    axes = plt.gca()
+    axes.set_xlim([-1,1])
+    axes.set_ylim([-3,3])
+
     colors = np.random.rand(N)
     #area = np.pi * (15 * np.random.rand(N))**2  # 0 to 15 point radii
     area = float(sys.argv[1])
     #plt.scatter( Vals[:,0], Vals[:,1], s=area, c=colors, alpha=0.5)
-    plt.scatter( Vals[:,0], Vals[:,1], s=area, alpha=int(sys.argv[2]))
+    plt.scatter( Vals[:,0], Vals[:,1], s=area,c = sys.argv[3],alpha=float(sys.argv[2]))
     plt.savefig('ScatterPlot_'+ str(d_size)+ '.png', bbox_inches='tight')
 
     W_s = Vals[0:10]
@@ -56,6 +66,11 @@ for d_size in sizes:
     for W in W_s:
         Y = LinearEq(X,W)
         plt.figure(temp)
+
+	axes = plt.gca()
+	axes.set_xlim([-1,1])
+	axes.set_ylim([-2,2])
+
         plt.plot(X, Y)
            
         
